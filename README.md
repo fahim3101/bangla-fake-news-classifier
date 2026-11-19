@@ -9,6 +9,23 @@ and reports accuracy, macro F1, training cost, and error patterns.
 
 ---
 
+## Results at a Glance
+
+> Filled in on Day 14. Until then, see [`PROGRESS.md`](PROGRESS.md) for the current status.
+
+| | |
+|---|---|
+| **Best model** | — |
+| **Macro F1** | — |
+| **Improvement over baseline** | — |
+| **Training time** | — |
+
+**Key takeaways**
+
+1. —
+2. —
+3. —
+
 ## 1. Problem
 
 Fake news spreads quickly on social media in Bangladesh, and most readers share content without
@@ -84,8 +101,10 @@ Notebooks should be run in order:
 ├── models/         # saved vectorizer / model files
 ├── notebooks/      # Jupyter notebooks, in order
 ├── notes/          # daily learning notes
+├── results/        # charts and figures used in the README
 ├── requirements.txt
-└── README.md
+├── PROGRESS.md     # day-by-day tracker
+└── README.md       # final report
 ```
 
 ## 9. References
