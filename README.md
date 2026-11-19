@@ -119,7 +119,7 @@ Notebooks should be run in order:
 ## Progress
 
 - [x] Day 1 — environment setup and pandas fundamentals (Practice 1)
-- [ ] Day 2–3 — ML concepts and confusion matrix (Practice 2)
+- [x] Day 2–3 — ML concepts and confusion matrix (Practice 2)
 - [ ] Day 4–5 — TF-IDF and n-grams (Practice 3)
 - [ ] Day 6–7 — dataset, EDA, preprocessing
 - [ ] Day 8–9 — baseline models and comparison (Practice 5)

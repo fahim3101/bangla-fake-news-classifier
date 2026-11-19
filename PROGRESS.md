@@ -8,8 +8,8 @@ Day-by-day tracker for the Bangla Fake News Classifier. The final report lives i
 | Day | Topic | Notebook | Status | Notes |
 |---|---|---|---|---|
 | 1 | Environment setup + pandas fundamentals | `day1_pandas.ipynb` | ✅ Done | [day01](notes/day01-setup-and-pandas.md) |
-| 2–3 | ML concepts + confusion matrix (Practice 2) | — | ⬜ Next | — |
-| 4–5 | TF-IDF and n-grams (Practice 3) | — | ⬜ | — |
+| 2–3 | ML concepts + confusion matrix (Practice 2) | — | ✅ Done | [day02](notes/day02-ml-concepts.md) |
+| 4–5 | TF-IDF and n-grams (Practice 3) | — | ⬜ Next | — |
 | 6–7 | Dataset, EDA, preprocessing | — | ⬜ | — |
 | 8–9 | Baseline models + comparison (Practice 5) | — | ⬜ | — |
 | 10–11 | Confusion matrix + error analysis | — | ⬜ | — |
