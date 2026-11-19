@@ -1,0 +1,14 @@
+# Core data stack (Day 1)
+pandas==3.1.1
+numpy==2.5.5
+matplotlib==3.11.2
+seaborn==0.13.2
+scikit-learn==1.9.1
+joblib==1.6.0
+
+# Notebook
+jupyter==1.1.1
+ipykernel==7.4.0
+
+# Demo app (Step 10 e lagbe)
+# streamlit==1.x.x
