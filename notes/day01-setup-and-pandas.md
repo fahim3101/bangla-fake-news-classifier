@@ -1,17 +1,17 @@
-# Day 1 — Setup + pandas basics
+# Day 1 — Environment setup and pandas fundamentals
 
 **Date:** 2026-11-20
 **Notebook:** `notebooks/day1_pandas.ipynb`
-**Topic:** Project 1 (Bangla Fake News Classifier) — environment setup + pandas er prothom din
+**Project:** Bangla Fake News Classifier — setup and first pandas session
 
 ---
 
-## 1. Setup (ja ja kora hoyeche)
+## 1. Environment
 
-| Jinish | Version / Value |
+| Component | Version |
 |---|---|
 | Python | 3.14.6 |
-| venv | `F:\AI-ML\venv` |
+| Virtual environment | `venv/` |
 | pandas | 3.1.1 |
 | numpy | 2.5.5 |
 | scikit-learn | 1.9.1 |
@@ -19,30 +19,24 @@
 | seaborn | 0.13.2 |
 | joblib | 1.6.0 |
 | JupyterLab | 4.6.6 |
-| Kernel | `bangla-fake` (venv er sathe linked) |
-| Editor | VS Code + Python / Pylance / Jupyter extension |
+| Jupyter kernel | `bangla-fake` (linked to `venv`) |
+| Editor | VS Code with Python, Pylance, and Jupyter extensions |
 
-venv activate:
+Activate the environment before installing anything:
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-Kichu install korte hole age venv activate korte hobe, tarpor `pip install ...`.
-
----
-
 ## 2. Dataset
 
-- Source: Kaggle — *Titanic: Machine Learning from Disaster* (practice er jonno, asol project e Bangla fake news dataset hobe)
+- Source: Kaggle — *Titanic: Machine Learning from Disaster* (practice dataset only)
 - Local path: `data/titanic/train.csv`
-- Size: 891 row × 12 column
+- Shape: 891 rows × 12 columns
 
----
+## 3. Work log
 
-## 3. Notebook e ja ja chalalam
-
-### File load
+### Loading the file
 
 ```python
 import pandas as pd
@@ -51,49 +45,46 @@ df = pd.read_csv(r"F:\AI-ML\data\titanic\train.csv")
 print(df.shape)
 ```
 
-Output: `(891, 12)` → 891 row, 12 column
+Output: `(891, 12)` — 891 rows, 12 columns.
 
-### Prothom 5 row
+### Inspecting rows and columns
 
 ```python
-df.head()
+df.head()               # first 5 rows
+df.columns.tolist()     # column names
 ```
 
-### Structure + missing value
+### Structure and missing values
 
 ```python
 df.info()
 ```
 
-Dekha gelo:
+Findings:
 
-- `Age` → 714 non-null → **177 missing**
-- `Cabin` → 204 non-null → **687 missing**
-- `Embarked` → 889 non-null → **2 missing**
-
-### Missing value count
+- `Age` — 714 non-null → **177 missing**
+- `Cabin` — 204 non-null → **687 missing**
+- `Embarked` — 889 non-null → **2 missing**
 
 ```python
 df.isnull().sum()
 ```
 
-### Label distribution (class balance)
+### Class distribution
 
 ```python
 df["Survived"].value_counts()
 ```
-
-Output:
 
 ```
 0    549
 1    342
 ```
 
-`normalize=True` dile percentage: `0 → 0.616`, `1 → 0.384`
-→ **imbalanced dataset** (61.6% vs 38.4%)
+With `normalize=True`: `0 → 0.616`, `1 → 0.384`, i.e. an **imbalanced** target
+(61.6% vs 38.4%). This is why accuracy alone is misleading and macro F1 / recall must be reported.
 
-### Bar chart
+### Bar charts
 
 ```python
 import matplotlib.pyplot as plt
@@ -103,38 +94,32 @@ plt.title("Sex distribution")
 plt.show()
 ```
 
-Pclass er jonno:
-
 ```python
 df["Pclass"].value_counts().sort_index().plot(kind="bar")
 plt.title("Passenger class")
 plt.show()
 ```
 
-> `sort_index()` na dile count onujayi order hoy (`3, 1, 2`), `sort_index()` dile `1, 2, 3`.
+`sort_index()` is required for ordered categories; otherwise `value_counts()` sorts by count.
 
----
+## 4. Command reference
 
-## 4. Command cheat-sheet
-
-| Kaj | Command |
+| Task | Command |
 |---|---|
-| File load | `pd.read_csv("path")` |
-| Size (row, col) | `df.shape` |
-| Prothom / shesh row | `df.head()` / `df.tail()` |
+| Load a CSV | `pd.read_csv("path")` |
+| Shape (rows, columns) | `df.shape` |
+| First / last rows | `df.head()` / `df.tail()` |
 | Random sample | `df.sample(5)` |
-| Column name list | `df.columns.tolist()` |
-| Structure + dtype + non-null | `df.info()` |
-| Missing value count | `df.isnull().sum()` |
-| Value count | `df["col"].value_counts()` |
-| Percentage | `df["col"].value_counts(normalize=True)` |
-| Number summary | `df.describe()` |
-| Group er average | `df.groupby("col")["target"].mean()` |
+| Column names | `df.columns.tolist()` |
+| Structure, dtypes, non-null counts | `df.info()` |
+| Missing values per column | `df.isnull().sum()` |
+| Value counts | `df["col"].value_counts()` |
+| Percentages | `df["col"].value_counts(normalize=True)` |
+| Numeric summary | `df.describe()` |
+| Group averages | `df.groupby("col")["target"].mean()` |
 | Bar chart | `df["col"].value_counts().plot(kind="bar")` |
 
----
-
-## 5. Bhul theke shikha
+## 5. Debugging lesson
 
 **Error:**
 
@@ -142,33 +127,33 @@ plt.show()
 FileNotFoundError: [Errno 2] No such file or directory: 'F:\\AI-ML\\data\\train.csv'
 ```
 
-**Karon:** file ta `data\titanic\` folder er bhitore chilo, `data\` e na.
+**Cause:** the file was inside `data/titanic/`, not directly in `data/`.
 
-**Shikha:**
+**Lesson:**
 
-- `FileNotFoundError` = path e file nai; Python path ta literally pore.
-- Error ashle age path ta alada kore check koro:
+- `FileNotFoundError` means the path does not exist; Python reads the path literally.
+- Verify the path separately before blaming the code:
 
 ```python
 import os
 os.path.exists(r"F:\AI-ML\data\titanic\train.csv")
 ```
 
-- GitHub e push korar por absolute path (`F:\...`) onno machine e kaj korbe na — tokhon relative path use korbo: `../data/titanic/train.csv`
+- Absolute paths (`F:\...`) will not work on another machine after cloning. Relative paths
+  (e.g. `../data/titanic/train.csv` from inside `notebooks/`) will be used for the final version.
 
----
+## 6. Key takeaways
 
-## 6. Aajker insight
+- The `Survived` column is binary (0/1), exactly like the `label` column (0 = real, 1 = fake) in the
+  fake news project. The same `value_counts()` pattern will be reused.
+- `df.info()` and `df.isnull().sum()` are the first checks before any modeling, because unhandled
+  missing values break the pipeline.
+- With imbalanced classes, accuracy is not enough — macro F1 and recall must be reported.
 
-- `Survived` column ta 0/1 — ঠিক fake news project er `label` (0 = real, 1 = fake) er moto. Same `value_counts()` pattern porer project e direct kaje lagbe.
-- `df.info()` / `isnull()` diye model banar age data er quality bujhte hoy.
-- Imbalanced data te shudhu accuracy na dekhe **macro F1 / recall** dekha lage (PDF section 2.3).
+## 7. Next steps (Day 2–3)
 
----
-
-## 7. Porer kaj (Day 2–3)
-
-- [ ] `df.describe()` — number column er summary
-- [ ] `df.groupby("Sex")["Survived"].mean()` — kon group beshi bneche
+- [ ] `df.describe()` — numeric summary
+- [ ] `df.groupby("Sex")["Survived"].mean()` — survival rate by group
 - [ ] Train/test split, overfitting, accuracy vs precision vs recall vs F1
-- [ ] **Practice 2 (khatay hate likha):** 100 news, 20 fake; 15 fake dhora porse, 5 miss, 10 real ke vul fake bola hoyeche → Precision, Recall, F1 ber kora
+- [ ] **Practice 2 (handwritten):** 100 news items, 20 fake; 15 fakes caught, 5 missed, 10 real items
+      wrongly flagged → compute precision, recall, and F1

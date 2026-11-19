@@ -6,15 +6,15 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# Virtual environment
+# Virtual environments
 venv/
 .venv/
 env/
 
-# Dataset (license / size er karon e repo te rakha hoy na)
+# Datasets (license and size)
 data/
 
-# Boro model file
+# Large model files
 models/*.bin
 models/*.safetensors
 models/*.pt
